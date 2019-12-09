@@ -1,0 +1,1 @@
+export const say = () => {return 'say hi'}
