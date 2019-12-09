@@ -16,10 +16,10 @@ const clean = async () => {
 
 const build = async () => {
   return files.map(file => {
-    return src(`${filePath}/${file}/src/**/*.js`)
+    return src(`${filePath}/${file}/src/**/*.ts`)
       .pipe(
         babel({
-          presets: ["@babel/env"]
+          presets: ["@babel/preset-env", "@babel/preset-typescript"],
         })
       )
       .pipe(dest(`${filePath}/${file}/lib`));
