@@ -8,4 +8,4 @@ module.exports = {
   jsxBracketSameLine: true,
   arrowParens: 'always',
   parser: 'typescript',
-};
+}
