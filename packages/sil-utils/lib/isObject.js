@@ -9,12 +9,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /**
  * Checks if `value` is the of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- * @param {*} value 
+ * @param {*} value
  */
 function isObject(value) {
   var type = _typeof(value);
 
-  return value != null && (type == 'object' || type == 'function');
+  return value !== null && (type === 'object' || type === 'function');
 }
 
 var _default = isObject;

@@ -1,42 +1,42 @@
-const fs = require("fs");
-const path = require("path");
-const { src, dest, parallel } = require("gulp");
-const glupClean = require("gulp-clean");
-const babel = require("gulp-babel");
-const jest = require("gulp-jest").default;
+const fs = require('fs')
+const path = require('path')
+const { src, dest, parallel } = require('gulp')
+const glupClean = require('gulp-clean')
+const babel = require('gulp-babel')
+const jest = require('gulp-jest').default
 
-const filePath = path.resolve("./packages");
-const files = fs.readdirSync(filePath);
+const filePath = path.resolve('./packages')
+const files = fs.readdirSync(filePath)
 
 const clean = async () => {
-  return files.map(file => {
-    return src(`${filePath}/${file}/lib/*`).pipe(glupClean());
-  });
-};
+  return files.map((file) => {
+    return src(`${filePath}/${file}/lib/*`).pipe(glupClean())
+  })
+}
 
 const build = async () => {
-  return files.map(file => {
+  return files.map((file) => {
     return src(`${filePath}/${file}/src/**/*.ts`)
       .pipe(
         babel({
-          presets: ["@babel/preset-env", "@babel/preset-typescript"],
+          presets: ['@babel/preset-env', '@babel/preset-typescript'],
         })
       )
-      .pipe(dest(`${filePath}/${file}/lib`));
-  });
-};
+      .pipe(dest(`${filePath}/${file}/lib`))
+  })
+}
 
 const test = async () => {
   return src(`**/*/__tests__`).pipe(
     jest({
       preprocessorIgnorePatterns: [`/lib/`, `/node_modules/`],
       automock: false,
-      allowEmpty: true
+      allowEmpty: true,
     })
-  );
+  )
 }
 
 exports.clean = clean
-exports.test = test;
-exports.build = build;
-exports.default = parallel(clean, build, test);
+exports.test = test
+exports.build = build
+exports.default = parallel(clean, build, test)
