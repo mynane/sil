@@ -1,9 +1,9 @@
 /**
  * Checks if `value` is `null`.
- * @param {*} value 
+ * @param {*} value
  */
-function isNull(value) {
-  return value === null;
+function isNull(value): boolean {
+  return value === null
 }
 
-export default isNull;
+export default isNull

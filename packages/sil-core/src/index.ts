@@ -1,1 +1,1 @@
-export const say = () => {return 'say hi'}
+export const say = (): string => 'say hi'

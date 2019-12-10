@@ -1,4 +1,4 @@
 // Checks if `value` is classified as an `Array` object.
-const isArray = Array.isArray;
+const isArray = Array.isArray
 
-export default isArray;
+export default isArray

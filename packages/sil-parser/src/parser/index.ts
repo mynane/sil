@@ -1,3 +1,1 @@
-export default (str) => {
-  return str
-}
+export default (str: string): string => str
