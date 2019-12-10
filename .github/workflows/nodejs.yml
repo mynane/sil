@@ -23,6 +23,6 @@ jobs:
         npm install
         lerna bootstrap
         npm test
-        npm eslint
+        npm run eslint
       env:
         CI: true
