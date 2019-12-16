@@ -1,2 +1,4 @@
-import parser from './parser'
-export { parser }
+import Parser from './parser'
+
+Parser('<div></div>')
+export { Parser }
