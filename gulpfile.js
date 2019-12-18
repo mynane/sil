@@ -17,20 +17,29 @@ const clean = async () => {
   })
 }
 
+function getTask(file) {
+  return src(`${filePath}/${file}/src/**/*.ts`)
+    .pipe(
+      babel({
+        presets: ['@babel/preset-env', '@babel/preset-typescript'],
+        plugins: ['@babel/plugin-transform-async-to-generator'],
+      })
+    )
+    .pipe(dest(`${filePath}/${file}/lib`))
+}
+
 /**
  * 构建ts文件
  */
 const build = async () => {
-  return files.map((file) => {
-    return src(`${filePath}/${file}/src/**/*.ts`)
-      .pipe(
-        babel({
-          presets: ['@babel/preset-env', '@babel/preset-typescript'],
-          plugins: ['@babel/plugin-transform-async-to-generator'],
-        })
-      )
-      .pipe(dest(`${filePath}/${file}/lib`))
+  var temp = []
+  files.forEach((file) => {
+    const task = getTask(file)
+
+    temp.push(task)
   })
+
+  return temp
 }
 
 /**
@@ -46,7 +55,21 @@ const test = async () => {
   )
 }
 
+/**
+ * 监听文件变化
+ */
+const watchFiles = async () => {
+  const watcher = watch(`packages/**/*/src/**/*.ts`)
+
+  watcher.on('all', function(stats, path) {
+    console.log(stats, path)
+    const matchs = path.match(/^packages\/(.*)\/src\/.*.ts$/)
+    getTask(matchs[1])
+  })
+}
+
 exports.clean = clean
 exports.test = test
 exports.build = build
+exports.watch = watchFiles
 exports.default = parallel(clean, build, test)

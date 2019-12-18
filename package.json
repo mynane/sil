@@ -6,7 +6,8 @@
     "clean": "gulp clean",
     "build": "gulp build",
     "test": "gulp test",
-    "start": "npm run clean && npm run bootstrap && npm run build && npm run test",
+    "watch": "gulp watch",
+    "start": "npm run clean && npm run bootstrap && npm run build && npm run watch",
     "eslint": "eslint --ext .ts --fix ./packages/**/src"
   },
   "husky": {
